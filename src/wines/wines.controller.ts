@@ -1,11 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Res } from '@nestjs/common';
 
 @Controller('wines')
 export class WinesController {
   @Get()
-  listAll() {
-    return 'Lista de vinhos';
+  listAll(
+    @Res() response
+  ) {
+    return response.status(200).send('Lista de vinhos');
   }
 
   @Get(':id')
@@ -16,6 +18,7 @@ export class WinesController {
   }
 
   @Post()
+  @HttpCode(HttpStatus.NO_CONTENT)
   create(
     @Body() body // parâmetro do que será enviado na requisição
   ) {
