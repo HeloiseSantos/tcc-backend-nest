@@ -1,17 +1,24 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 @Controller('wines')
 export class WinesController {
   @Get()
-  listAllWines() {
+  listAll() {
     return 'Lista de vinhos';
   }
 
   @Get(':id')
-  listOneWine(
+  listOne(
     @Param('id') id: string
   ) {
     return `Vinho #${id}`;
+  }
+
+  @Post()
+  create(
+    @Body() body // parâmetro do que será enviado na requisição
+  ) {
+    return body;
   }
 }
