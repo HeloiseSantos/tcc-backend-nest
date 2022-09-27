@@ -1,9 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Controller, Get, Param } from '@nestjs/common';
 
-@Controller()
+@Controller('wines')
 export class WinesController {
-  @Get('wines')
+  @Get()
   listAllWines() {
     return 'Lista de vinhos';
+  }
+
+  @Get(':id')
+  listOneWine(
+    @Param('id') id: string
+  ) {
+    return `Vinho #${id}`;
   }
 }
