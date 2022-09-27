@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Res } from '@nestjs/common';
 
 @Controller('wines')
 export class WinesController {
@@ -23,5 +23,20 @@ export class WinesController {
     @Body() body // parâmetro do que será enviado na requisição
   ) {
     return body;
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() body
+  ) {
+    return `Atualização do vinho #${id}`;
+  }
+
+  @Delete(':id')
+  delete(
+    @Param('id') id: string
+  ) {
+    return `Remoção do vinho #${id}`;
   }
 }
