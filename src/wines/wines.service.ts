@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Wine } from './entities/wine.entity';
 
 @Injectable()
@@ -14,11 +14,23 @@ export class WinesService {
     ];
 
     listAll() {
-        return this.wines;
+        const allWines = this.wines;
+
+        if(allWines.length == 0) {
+            throw new HttpException(`Nenhum vinho encontrado!`, HttpStatus.NOT_FOUND);
+        } else {
+            return allWines;
+        }
     }
 
     listOne(id: string) {
-        return this.wines.find((Wine) => Wine.id === Number(id));
+        const wine = this.wines.find((Wine) => Wine.id === Number(id));
+
+        if(!wine) {
+            throw new HttpException(`Vinho ID #${id} não encontrado!`, HttpStatus.NOT_FOUND);
+        } else {
+            return wine;
+        }
     }
 
     create(createWineDto: any) {
