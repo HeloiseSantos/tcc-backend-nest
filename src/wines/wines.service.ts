@@ -31,7 +31,7 @@ export class WinesService {
         this.wines[indexWine] = updateWineDto;
     }
 
-    remove(id: string) {
+    delete(id: string) {
         const indexWine = this.wines.findIndex((Wine) => Wine.id === Number(id));
 
         if(indexWine >= 0) {

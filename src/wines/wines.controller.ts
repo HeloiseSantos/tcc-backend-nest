@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { WinesService } from './wines.service';
 
 @Controller('wines')
@@ -10,25 +10,22 @@ export class WinesController {
   ) {}
 
   @Get()
-  listAll(
-    @Res() response
-  ) {
-    return response.status(200).send('Lista de vinhos');
+  listAll() {
+    return this.winesService.listAll();
   }
 
   @Get(':id')
   listOne(
     @Param('id') id: string
   ) {
-    return `Vinho #${id}`;
+    return this.winesService.listOne(id);
   }
 
   @Post()
-  @HttpCode(HttpStatus.NO_CONTENT)
   create(
-    @Body() body // parâmetro do que será enviado na requisição
+    @Body() body
   ) {
-    return body;
+    return this.winesService.create(body);
   }
 
   @Patch(':id')
@@ -36,13 +33,13 @@ export class WinesController {
     @Param('id') id: string,
     @Body() body
   ) {
-    return `Atualização do vinho #${id}`;
+    return this.winesService.update(id, body);
   }
 
   @Delete(':id')
   delete(
     @Param('id') id: string
   ) {
-    return `Remoção do vinho #${id}`;
+    return this.winesService.delete(id);
   }
 }
