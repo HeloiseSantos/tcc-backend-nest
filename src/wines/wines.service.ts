@@ -28,9 +28,9 @@ export class WinesService {
 
         if(!wine) {
             throw new HttpException(`Vinho ID #${id} não encontrado!`, HttpStatus.NOT_FOUND);
-        } else {
-            return wine;
         }
+
+        return wine;
     }
 
     create(createWineDto: any) {
