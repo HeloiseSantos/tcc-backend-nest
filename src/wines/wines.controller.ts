@@ -1,8 +1,14 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Res } from '@nestjs/common';
+import { WinesService } from './wines.service';
 
 @Controller('wines')
 export class WinesController {
+
+  constructor(
+    private readonly winesService: WinesService,
+  ) {}
+
   @Get()
   listAll(
     @Res() response
