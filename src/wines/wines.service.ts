@@ -18,9 +18,9 @@ export class WinesService {
 
         if(allWines.length == 0) {
             throw new HttpException(`Nenhum vinho encontrado!`, HttpStatus.NOT_FOUND);
-        } else {
-            return allWines;
         }
+
+        return allWines;
     }
 
     listOne(id: string) {
