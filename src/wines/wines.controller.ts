@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { CreateWineDto } from './dto/create-wine.dto';
+import { UpdateWineDto } from './dto/update-wine.dto';
 import { WinesService } from './wines.service';
 
 @Controller('wines')
@@ -23,17 +25,17 @@ export class WinesController {
 
   @Post()
   create(
-    @Body() body
+    @Body() createWineDto: CreateWineDto
   ) {
-    return this.winesService.create(body);
+    return this.winesService.create(createWineDto);
   }
 
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() body
+    @Body() updateWineDto: UpdateWineDto
   ) {
-    return this.winesService.update(id, body);
+    return this.winesService.update(id, updateWineDto);
   }
 
   @Delete(':id')
