@@ -2,6 +2,9 @@
 export class Wine {
     id: number;
     name: string;
-    description: string;
-    tags: string[];
+    type: string;
+    ingredients: string[];
+    manufacturingDate: string;
+    unitPrice: number;
+    quantityProduced: number;
 }

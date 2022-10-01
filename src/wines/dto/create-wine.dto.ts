@@ -1,13 +1,22 @@
 /* eslint-disable prettier/prettier */
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateWineDto {
     @IsString()
     readonly name: string;
 
     @IsString()
-    readonly description: string;
+    readonly type: string;
 
     @IsString({ each: true })
-    readonly tags: string[];
+    readonly ingredients: string[];
+
+    @IsString()
+    readonly manufacturingDate: string;
+
+    @IsNumber()
+    readonly unitPrice: string;
+
+    @IsNumber()
+    readonly quantityProduced: string;
 }

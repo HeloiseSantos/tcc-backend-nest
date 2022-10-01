@@ -8,8 +8,11 @@ export class WinesService {
         {
             id: 1,
             name: "Vinho tinto",
-            description: "Vinho tinto",
-            tags: ["Vinho tinto", "Uva Merlot", "Cabernet"]
+            type: "Vinho tinto",
+            ingredients: ["Vinho tinto", "Uva Merlot", "Cabernet"],
+            manufacturingDate: "12/12/22",
+            unitPrice: 12,
+            quantityProduced: 56
         }
     ];
 
