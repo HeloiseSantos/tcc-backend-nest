@@ -13,7 +13,7 @@ export class WinesService {
         }
     ];
 
-    listAll() {
+    findAll() {
         const allWines = this.wines;
 
         if(allWines.length == 0) {
@@ -23,7 +23,7 @@ export class WinesService {
         return allWines;
     }
 
-    listOne(id: string) {
+    findOne(id: string) {
         const wine = this.wines.find((Wine) => Wine.id === Number(id));
 
         if(!wine) {

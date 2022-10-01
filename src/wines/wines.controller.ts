@@ -12,15 +12,15 @@ export class WinesController {
   ) {}
 
   @Get()
-  listAll() {
-    return this.winesService.listAll();
+  findAll() {
+    return this.winesService.findAll();
   }
 
   @Get(':id')
-  listOne(
+  findOne(
     @Param('id') id: string
   ) {
-    return this.winesService.listOne(id);
+    return this.winesService.findOne(id);
   }
 
   @Post()
