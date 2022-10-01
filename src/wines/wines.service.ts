@@ -34,7 +34,8 @@ export class WinesService {
     }
 
     create(createWineDto: any) {
-        return this.wines.push(createWineDto);
+        this.wines.push(createWineDto);
+        return createWineDto;
     }
 
     update(id: string, updateWineDto: any) {
