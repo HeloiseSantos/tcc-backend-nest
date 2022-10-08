@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
-export class Wine {
-    id: number;
+import { Document } from 'mongoose';
+export class Wine extends Document {
+    // id: number;
     name: string;
     type: string;
-    ingredients: string[];
+    // ingredients: string[];
     manufacturingDate: string;
     unitPrice: number;
     quantityProduced: number;

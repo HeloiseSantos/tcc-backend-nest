@@ -1,57 +1,67 @@
 /* eslint-disable prettier/prettier */
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { Wine } from './entities/wine.entity';
 
 @Injectable()
 export class WinesService {
-    private wines: Wine[] = [
-        {
-            id: 1,
-            name: "Vinho tinto",
-            type: "Vinho tinto",
-            ingredients: ["Vinho tinto", "Uva Merlot", "Cabernet"],
-            manufacturingDate: "12/12/22",
-            unitPrice: 12,
-            quantityProduced: 56
-        }
-    ];
 
-    findAll() {
-        const allWines = this.wines;
+    constructor(
+        @InjectModel('Wine') private readonly wineModel: Model<Wine>
+    ) {
 
-        if(allWines.length == 0) {
-            throw new HttpException(`Nenhum vinho encontrado!`, HttpStatus.NOT_FOUND);
-        }
-
-        return allWines;
     }
 
-    findOne(id: string) {
-        const wine = this.wines.find((Wine) => Wine.id === Number(id));
+    async findAll() {
+        // const allWines = this.wines;
 
-        if(!wine) {
-            throw new HttpException(`Vinho ID #${id} não encontrado!`, HttpStatus.NOT_FOUND);
-        }
+        // if(allWines.length == 0) {
+        //     throw new HttpException(`Nenhum vinho encontrado!`, HttpStatus.NOT_FOUND);
+        // }
 
-        return wine;
+        // return allWines;
+
+        // indo no BD  e buscando todos os dados que estão na coleção de tarefas
+        return await this.wineModel.find().exec();
     }
 
-    create(createWineDto: any) {
-        this.wines.push(createWineDto);
-        return createWineDto;
+    async findOne(id: string) {
+        // const wine = this.wines.find((Wine) => Wine.id === Number(id));
+
+        // if(!wine) {
+        //     throw new HttpException(`Vinho ID #${id} não encontrado!`, HttpStatus.NOT_FOUND);
+        // }
+
+        // return wine;
+
+        return await this.wineModel.findById(id).exec();
     }
 
-    update(id: string, updateWineDto: any) {
-        const indexWine = this.wines.findIndex((Wine) => Wine.id === Number(id));
+    async create(createWineDto: any) {
+        // this.wines.push(createWineDto);
+        // return createWineDto;
 
-        this.wines[indexWine] = updateWineDto;
+        const createdWine = new this.wineModel(createWineDto);
+        return await createdWine.save();
     }
 
-    delete(id: string) {
-        const indexWine = this.wines.findIndex((Wine) => Wine.id === Number(id));
+    async update(id: string, updateWineDto: any) {
+        // const indexWine = this.wines.findIndex((Wine) => Wine.id === Number(id));
 
-        if(indexWine >= 0) {
-            this.wines.splice(indexWine, 1);
-        }
+        // this.wines[indexWine] = updateWineDto;
+        
+        await this.wineModel.updateOne({ _id: id }, updateWineDto).exec;
+        return this.findOne(id);
+    }
+
+    async delete(id: string) {
+        // const indexWine = this.wines.findIndex((Wine) => Wine.id === Number(id));
+
+        // if(indexWine >= 0) {
+        //     this.wines.splice(indexWine, 1);
+        // }
+
+        return await this.wineModel.deleteOne({ _id: id }).exec();
     }
 }

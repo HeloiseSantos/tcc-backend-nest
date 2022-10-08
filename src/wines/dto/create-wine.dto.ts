@@ -8,8 +8,8 @@ export class CreateWineDto {
     @IsString()
     readonly type: string;
 
-    @IsString({ each: true })
-    readonly ingredients: string[];
+    // @IsString({ each: true })
+    // readonly ingredients: string[];
 
     @IsString()
     readonly manufacturingDate: string;
