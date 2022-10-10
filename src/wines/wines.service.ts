@@ -51,7 +51,7 @@ export class WinesService {
 
         // this.wines[indexWine] = updateWineDto;
         
-        await this.wineModel.updateOne({ _id: id }, updateWineDto).exec;
+        await this.wineModel.updateOne({ _id: id }, updateWineDto).exec();
         return this.findOne(id);
     }
 
