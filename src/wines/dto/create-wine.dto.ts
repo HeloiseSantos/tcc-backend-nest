@@ -3,9 +3,6 @@ import { IsNumber, IsString } from 'class-validator';
 
 export class CreateWineDto {
     @IsString()
-    readonly _id: string;
-
-    @IsString()
     readonly name: string;
 
     @IsString()
